@@ -1,4 +1,5 @@
 import * as random from './random'
+import {randomInt} from "./random";
 import {jest, test, expect, beforeEach} from "@jest/globals"; // this is optional, all three are global variables im runner scope
 
 import {randomRGBColor} from './color'
@@ -25,3 +26,26 @@ test ('Random color generates 3-tuple', () => {
 
     expect(mockFn).toHaveBeenCalledTimes(3);
 });
+
+test ('Mock stable value', ()=>{
+    const spyRandomInt = jest.fn(()=>randomInt);
+
+    spyRandomInt.mockReturnValue(100)
+        .mockReturnValue(255)
+        .mockReturnValue(260)
+
+
+    random.randomInt = spyRandomInt
+
+    const color = randomRGBColor();
+
+    expect(color).toBeInstanceOf(Array);
+    expect(color).toHaveLength(3);
+    const [red, green, blue] = color
+
+    expect(red).toBeGreaterThanOrEqual(0);
+    expect(red).toBeLessThanOrEqual(255);
+
+
+
+})

@@ -1,0 +1,20 @@
+body{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    flex-direction: column;
+}
+
+form{
+    display: flex;
+    width: 45%;
+    flex-direction: column;
+}
+
+.base_fields{
+    padding-left: .5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
