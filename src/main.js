@@ -15,7 +15,6 @@ app.get('/', function (req, res) {
 })
 
 app.post('/api/avatars', (req, res)=>{
-
     console.log(" POST /api/avatars")
     let newAvatar = req.body
     newAvatar = {id: Date.now(), ...newAvatar, childAge: parseInt(newAvatar.childAge), createdAt: new Date(Date.now()).toISOString()}
@@ -28,7 +27,6 @@ app.post('/api/avatars', (req, res)=>{
     }catch (e){
         res.sendStatus(500)
     }
-
 })
 
 // app.get("/avatars", async (req, res) => {
