@@ -168,7 +168,7 @@ app.post("/api/users", async (req, res) => {
     const newUser = {
         ...req.body,
         password: await bcrypt.hash(req.body.password, 10),
-        roles: [Math.random() * 10 % 2 === 0 ? "parent" : "child"]
+        roles: ["parent"]
     }
 
     const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf8"))
