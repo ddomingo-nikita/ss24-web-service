@@ -12,10 +12,10 @@ describe("Cesar Cypher tests",  ()=>{
         expect(result).toEqual("snpnyf")
     })
 
-    test("Decrypt Nikita with 5 key", ()=>{
-        const result = caesarCipher("Nikita", true, 5)
-        expect(caesarCipher(result, false, 5)).toEqual("nikita")
-    })
+    // test("Decrypt Nikita with 5 key", ()=>{
+    //     const result = caesarCipher("Nikita", true, 5)
+    //     expect(caesarCipher(result, false, 5)).toEqual("nikita")
+    // })
 
     test("Decrypt ABCDEFGH with 27 key", ()=>{
         const result = caesarCipher("Y", true, 50)

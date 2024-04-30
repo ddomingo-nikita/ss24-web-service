@@ -56,44 +56,43 @@ app.use(express.json())
 app.get('/', function (req, res) {
     res.sendFile(`index.html`)
 })
-
-app.post('/api/avatars', passport.authenticate('basic', {session: false}), isParent,(req, res) => {
-    console.log(" POST /api/avatars")
-    let newAvatar = req.body
-
-
-    const {error, value} = avatarScheme.validate(newAvatar)
-
-    if (error) {
-        res.status(400).send(error)
-        return
-    }
+    app.post('/api/avatars',  passport.authenticate('basic', {session: false}), isParent, (req, res) => {
+        console.log(" POST /api/avatars")
+            let newAvatar = req.body
 
 
-    newAvatar = {
-        id: uuid.v4(),
-        avatarName: newAvatar.avatarName,
-        childAge: newAvatar.childAge,
-        skinColor: newAvatar.skinColor,
-        hairstyle: newAvatar.hairstyle,
-        headShape: newAvatar.headShape,
-        upperClothing: newAvatar.upperClothing,
-        lowerClothing: newAvatar.lowerClothing,
-        createdAt: new Date(Date.now()).toISOString()
-    }
+            const {error, value} = avatarScheme.validate(newAvatar)
+
+            if (error) {
+                res.status(400).send(error)
+                return
+            }
 
 
-    try {
+            newAvatar = {
+                id: uuid.v4(),
+                avatarName: newAvatar.avatarName,
+                childAge: newAvatar.childAge,
+                skinColor: newAvatar.skinColor,
+                hairstyle: newAvatar.hairstyle,
+                headShape: newAvatar.headShape,
+                upperClothing: newAvatar.upperClothing,
+                lowerClothing: newAvatar.lowerClothing,
+                createdAt: new Date(Date.now()).toISOString()
+            }
 
-        const obj = JSON.parse(fs.readFileSync(`${__dirname}/avatars.json`, "utf8"))
 
-        fs.writeFileSync(`${__dirname}/avatars.json`, JSON.stringify([...obj, newAvatar]))
-        res.status(201).set("Location", `/api/avatars/${newAvatar.id}`).send(newAvatar)
-    } catch (e) {
-        console.log(e)
-        res.sendStatus(500)
-    }
-})
+            try {
+
+                const obj = JSON.parse(fs.readFileSync(`${__dirname}/avatars.json`, "utf8"))
+
+                fs.writeFileSync(`${__dirname}/avatars.json`, JSON.stringify([...obj, newAvatar]))
+                res.status(201).set("Location", `/api/avatars/${newAvatar.id}`).send(newAvatar)
+            } catch (e) {
+                console.log(e)
+                res.sendStatus(500)
+            }
+    })
 
 app.get("/api/avatars", passport.authenticate('basic', {session: false}), isChild,  (req, res) => {
     console.log(" GET /api/avatars")

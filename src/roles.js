@@ -2,8 +2,8 @@ const ROLE_PARENT = "parent"
 const ROLE_CHILD = "child"
 
 
-export function isParent(request, response, nex){
-    if(request.user && request.user.roles.include(ROLE_PARENT)){
+export function isParent(request, response, next){
+    if(request.user && request.user.roles.includes(ROLE_PARENT)){
         return next()
     }
     else{
@@ -12,8 +12,8 @@ export function isParent(request, response, nex){
 }
 
 
-export function isChild(request, response, nex){
-    if(request.user && request.user.roles.include(ROLE_CHILD)){
+export function isChild(request, response, next){
+    if(request.user && (request.user.roles.includes(ROLE_CHILD) || request.user.roles.includes(ROLE_PARENT))){
         return next()
     }
     else{

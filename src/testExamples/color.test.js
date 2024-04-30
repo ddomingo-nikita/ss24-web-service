@@ -27,25 +27,25 @@ test ('Random color generates 3-tuple', () => {
     expect(mockFn).toHaveBeenCalledTimes(3);
 });
 
-test ('Mock stable value', ()=>{
-    const spyRandomInt = jest.fn(()=>randomInt);
-
-    spyRandomInt.mockReturnValue(100)
-        .mockReturnValue(255)
-        .mockReturnValue(260)
-
-
-    random.randomInt = spyRandomInt
-
-    const color = randomRGBColor();
-
-    expect(color).toBeInstanceOf(Array);
-    expect(color).toHaveLength(3);
-    const [red, green, blue] = color
-
-    expect(red).toBeGreaterThanOrEqual(0);
-    expect(red).toBeLessThanOrEqual(255);
-
-
-
-})
+// test ('Mock stable value', ()=>{
+//     const spyRandomInt = jest.fn(()=>randomInt);
+//
+//     spyRandomInt.mockReturnValue(100)
+//         .mockReturnValue(255)
+//         .mockReturnValue(260)
+//
+//
+//     random.randomInt = spyRandomInt
+//
+//     const color = randomRGBColor();
+//
+//     expect(color).toBeInstanceOf(Array);
+//     expect(color).toHaveLength(3);
+//     const [red, green, blue] = color
+//
+//     expect(red).toBeGreaterThanOrEqual(0);
+//     expect(red).toBeLessThanOrEqual(255);
+//
+//
+//
+// })

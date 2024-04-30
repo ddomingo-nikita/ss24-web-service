@@ -14,6 +14,7 @@ describe("Avatar API", () => {
     }
     test("Create avatar", async () => {
         const response = await request(app)
+
             .post('/api/avatars')
             .auth('nikita@srh.edu', 'Ra123')
             .send(testData)
@@ -82,7 +83,7 @@ describe("Avatar API", () => {
             .set('Accept', 'application/json')
             .expect(201)
 
-        const newArray = await request(app).get('/api/avatars').expect(200)
+        const newArray = await request(app).get('/api/avatars').auth('nikita@srh.edu', 'Ra123').expect(200)
 
         expect(newArray.body.length).toBeGreaterThan(prevArray.body.length)
         expect(newArray.body).toEqual(expect.arrayContaining([expect.objectContaining({id: response.body.id})]))
@@ -136,7 +137,7 @@ describe("Avatar API", () => {
             .auth('nikita@srh.edu', 'Ra123')
             .expect(204)
 
-        const newArray = await request(app).get('/api/avatars').expect(200)
+        const newArray = await request(app).get('/api/avatars').auth('nikita@srh.edu', 'Ra123').expect(200)
 
         expect(newArray.body.length).toEqual(prevArray.body.length)
     })
